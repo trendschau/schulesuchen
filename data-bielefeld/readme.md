@@ -1,5 +1,8 @@
 Quellen: 
 
+* gemeinsames lernen: https://www.bezreg-detmold.nrw.de/system/files/media/document/file/4.44_inklusion_gl_schulen.pdf Per Claude in CSV konvertiert. 
+
+
 * Ganzheitlicher Entwicklungsplan: https://www.bildung-in-bielefeld.de/thema-gesamtbericht-der-ganzheitlichen-schulentwicklungsplanung-fuer-die-bielefelder-schulen/
 * Inklusion: https://www.bildung-in-bielefeld.de/thema-ganzheitliche-schulentwicklungsplanung-themenforum-inklusion/
 * Offene Daten NRW: https://www.schulministerium.nrw/open-data

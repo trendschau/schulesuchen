@@ -16,11 +16,13 @@ $lng        = 8.53;    // map center longitude
 $zoom       = 11;      // map initial zoom
 $outFile    = __DIR__ . "/../bielefeld/data/schulen.geojson";
 
-$license = 'Verwendete Daten: Ministeriums für Schule und Bildung '
-         . '(<a href="https://www.schulministerium.nrw/open-data">MSB</a>), '
-         . '<a href="https://www.govdata.de/dl-de/by-2-0">dl-de/by-2-0</a>';
+$license = 'Daten: @ Ministeriums für Schule und Bildung '
+         . '(<a href="https://www.schulministerium.nrw/open-data">MSB</a>) '
+         . '(<a href="https://www.govdata.de/dl-de/by-2-0">dl-de/by-2-0</a>), '
+         . '© Stadt Bielefeld, Amt für Geoinformation und Kataster,'
+         . '(<a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC BY 4.0</a>)';
 
-$mapping = "Schulformen wurden über mapSchulform() in ein UI-Schema überführt.";
+$mapping = "Informationen über das Mapping der Schulformen im Navigationspunkt über.";
 
 // =========================
 // SCHULFORM MAPPING — NRW school-type codes → canonical schulform
@@ -66,6 +68,7 @@ $anzahl     = indexBy(readCsv(__DIR__ . "/../data-nrw/anzahlen.csv"),"Schulnumme
 $sozial     = indexBy(readCsv(__DIR__ . "/../data-nrw/sozialindex.csv"),"Schulnummer");
 $bezreg     = indexBy(readCsv(__DIR__ . "/../data-nrw/key_bezreg.csv"),"Schlüssel");
 $klassen    = groupBy(readCsv(__DIR__ . "/../data-bielefeld/opendata_Schuelerzahlen_nach_Klasse_Stand_01102022_0.csv"), "Schulnummer");
+$glSchulen  = indexBy(readCsv(__DIR__ . "/../data-bielefeld/gemeinsames_lernen.csv"), "schulnummer");
 
 // =========================
 // TRANSFORM
@@ -162,6 +165,10 @@ foreach ($schools as $s) {
 
     $eigenschaften = [];
 
+    if (!empty($glSchulen[$id])) {
+        $eigenschaften[] = "Gemeinsames Lernen";
+    }
+
     // Beispiel-Mapping (nur wenn Daten vorhanden)
     if (!empty($s["Ganztag"])) {
         $eigenschaften[] = $s["Ganztag"] === "ja"
@@ -171,10 +178,6 @@ foreach ($schools as $s) {
 
     if (!empty($s["Jahrgangsuebergreifend"])) {
         $eigenschaften[] = "jahrgangsuebergreifend";
-    }
-
-    if (!empty($s["Inklusion"])) {
-        $eigenschaften[] = "inklusion";
     }
 
     if (!empty($s["Bilingual"])) {
@@ -223,6 +226,9 @@ $meta = [
     "zoom"           => $zoom,
     "lizenzhinweis"  => $license,
     "mappinghinweis" => $mapping,
+    "zone_layers"    => [
+        ["file" => "einzugsbereiche.geojson", "label" => "24/25", "default" => true],
+    ],
 ];
 
 writeGeoJson($outFile, $meta, $features);

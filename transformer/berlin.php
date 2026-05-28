@@ -186,11 +186,11 @@ $meta = [
     "lizenzhinweis"  => $license,
     "mappinghinweis" => $mapping,
     "zone_layers"    => [
-        ["file" => "data/esb_2022.json", "label" => "22/23"],
-        ["file" => "data/esb_2023.json", "label" => "23/24"],
-        ["file" => "data/esb_2024.json", "label" => "24/25"],
-        ["file" => "data/esb_2025.json", "label" => "25/26", "default" => true],
-        ["file" => "data/esb_2026.json", "label" => "26/27"],
+        ["file" => "esb_2022.json", "label" => "22/23"],
+        ["file" => "esb_2023.json", "label" => "23/24"],
+        ["file" => "esb_2024.json", "label" => "24/25"],
+        ["file" => "esb_2025.json", "label" => "25/26", "default" => true],
+        ["file" => "esb_2026.json", "label" => "26/27"],
     ],
 ];
 
